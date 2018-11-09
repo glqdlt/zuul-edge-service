@@ -10,6 +10,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.sql.DataSource;
 
+import java.util.Date;
+
 import static org.junit.Assert.*;
 
 @SpringBootTest
@@ -20,11 +22,25 @@ public class UserRepoTest {
     @Autowired
     DataSource dataSource;
 
+    @Autowired
+    UserRepo userRepo;
+
     @Test
     public void testConst() {
-
         Assert.assertNotNull(dataSource);
+    }
 
+    @Test
+    public void savedUser() {
+        User user
+                = new User();
+        user.setUserId("test-id");
+        user.setUserPw("test-pw");
+        user.setUserName("test-name");
+
+        User savedUser = userRepo.saveAndFlush(user);
+
+        Assert.assertNotNull(userRepo.findOne(savedUser.getPid()));
 
     }
 }
