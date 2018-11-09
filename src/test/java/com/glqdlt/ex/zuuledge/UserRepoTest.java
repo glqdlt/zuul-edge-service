@@ -30,17 +30,4 @@ public class UserRepoTest {
         Assert.assertNotNull(dataSource);
     }
 
-    @Test
-    public void savedUser() {
-        User user
-                = new User();
-        user.setUserId("test-id");
-        user.setUserPw("test-pw");
-        user.setUserName("test-name");
-
-        User savedUser = userRepo.saveAndFlush(user);
-
-        Assert.assertNotNull(userRepo.findOne(savedUser.getPid()));
-
-    }
 }
